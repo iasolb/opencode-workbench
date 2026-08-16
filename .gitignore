@@ -1,0 +1,8 @@
+*.bak
+
+# Local-only, never committed: anything credential-bearing that would only
+# exist on a personal machine. Defense-in-depth in case one is ever
+# relocated under a repo dir.
+.gmail-mcp/
+*.env
+.env.local

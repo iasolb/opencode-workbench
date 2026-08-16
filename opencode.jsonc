@@ -1,0 +1,104 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "provider": {
+    "ollama": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Ollama (local)",
+      "options": {
+        "baseURL": "http://localhost:11434/v1"
+      },
+      "models": {
+        "qwen2.5-coder:14b-instruct-q4_K_M": {
+          "name": "Qwen 2.5 Coder 14B (Q4_K_M)"
+        },
+        "qwen3-coder:30b-a3b-q4_K_M-32k": {
+          "name": "Qwen 3 Coder 30B A3B (Q4_K_M, 32k ctx)"
+        }
+      }
+    }
+  },
+  "model": "ollama/qwen3-coder:30b-a3b-q4_K_M-32k",
+  "small_model": "ollama/qwen2.5-coder:14b-instruct-q4_K_M",
+  "username": "<you>",
+  "instructions": ["<absolute path to this repo>/instructions.md"],
+  "permission": {
+    "bash": {
+      "*": "ask",
+      "git *": "allow",
+      "gh *": "allow",
+      "ollama *": "allow",
+      "docker ps *": "allow",
+      "docker start *": "allow",
+      "docker stop *": "allow",
+      "docker compose up -d *": "allow"
+    },
+    "external_directory": {
+      "*": "ask",
+      "<your memory bank repo>/**": "allow",
+      "<your projects root>/**": "allow"
+    },
+    "edit": "allow",
+    "webfetch": "allow",
+    "websearch": "allow",
+    "question": "allow",
+    "todowrite": "allow"
+  },
+  "mcp": {
+    // Replace the command with your own GitHub MCP launcher.
+    "github": {
+      "type": "local",
+      "command": ["cmd", "/c", "<absolute path to your github-mcp launcher>"],
+      "timeout": 15000
+    },
+    "context7": {
+      "type": "remote",
+      "url": "https://mcp.context7.com/mcp",
+      "timeout": 30000
+    },
+    "playwright": {
+      "type": "local",
+      "command": ["cmd", "/c", "npx", "-y", "@playwright/mcp", "--browser", "chrome"],
+      "timeout": 60000
+    },
+    "sequential-thinking": {
+      "type": "local",
+      "command": ["cmd", "/c", "npx", "-y", "@modelcontextprotocol/server-sequential-thinking"],
+      "timeout": 15000
+    },
+    "memory": {
+      "type": "local",
+      "command": ["cmd", "/c", "npx", "-y", "@modelcontextprotocol/server-memory"],
+      "cwd": "<absolute path to this repo>/data",
+      "timeout": 15000
+    },
+    "fetch": {
+      "type": "local",
+      "command": ["cmd", "/c", "uvx", "mcp-server-fetch"],
+      "timeout": 30000
+    },
+    "filesystem": {
+      "type": "local",
+      "command": [
+        "cmd",
+        "/c",
+        "npx",
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "<your projects root>",
+        "<your memory bank repo>"
+      ],
+      "timeout": 15000
+    },
+    // Optional, credential-bearing MCPs. The owner's live config adds gmail,
+    // google-workspace (OAuth keys file), a project MySQL server, a research
+    // postgres, and Desktop Commander. All carry secrets or absolute paths, so
+    // they stay out of this public repo: copy the shape from the live config
+    // on the machine that already has them, or see docs/troubleshooting.md.
+    "windows": {
+      "type": "local",
+      "command": ["cmd", "/c", "npx", "-y", "@wonderwhy-er/desktop-commander@latest"],
+      "enabled": true,
+      "timeout": 60000
+    }
+  }
+}
