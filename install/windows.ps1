@@ -52,3 +52,17 @@ foreach ($item in @("opencode.jsonc", "instructions.md", "agents", "commands", "
 Write-Host "Installed. Restart opencode to pick up the config."
 Write-Host "Replace <you>, <your memory bank root>, and <your projects root>"
 Write-Host "placeholders in opencode.jsonc and instructions.md before relying on them."
+
+# Ensure the TOON CLI is available globally for any TOON conversion work.
+$toonCheck = npm list -g @toon-format/cli 2>$null
+if ($LASTEXITCODE -ne 0) {
+    Write-Host "Installing @toon-format/cli globally..." -ForegroundColor Cyan
+    npm install -g @toon-format/cli 2>$null
+    if ($LASTEXITCODE -eq 0) {
+        Write-Host "Installed @toon-format/cli"
+    } else {
+        Write-Host "WARNING: failed to install @toon-format/cli." -ForegroundColor Yellow
+    }
+} else {
+    Write-Host "@toon-format/cli already installed"
+}

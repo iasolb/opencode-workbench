@@ -47,3 +47,15 @@ done
 echo "Installed. Restart opencode to pick up the config."
 echo "Replace <you>, <your memory bank root>, and <your projects root>"
 echo "placeholders in opencode.jsonc and instructions.md before relying on them."
+
+# Ensure the TOON CLI is available globally for any TOON conversion work.
+if ! command -v toon &>/dev/null; then
+    echo "Installing @toon-format/cli globally..."
+    if npm install -g @toon-format/cli 2>/dev/null; then
+        echo "Installed @toon-format/cli"
+    else
+        echo "WARNING: failed to install @toon-format/cli." >&2
+    fi
+else
+    echo "@toon-format/cli already installed"
+fi
