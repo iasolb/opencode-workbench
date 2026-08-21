@@ -1,24 +1,18 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "provider": {
-    "ollama": {
-      "npm": "@ai-sdk/openai-compatible",
-      "name": "Ollama (local)",
-      "options": {
-        "baseURL": "http://localhost:11434/v1"
-      },
-      "models": {
-        "qwen2.5-coder:14b-instruct-q4_K_M": {
-          "name": "Qwen 2.5 Coder 14B (Q4_K_M)"
-        },
-        "qwen3-coder:30b-a3b-q4_K_M-32k": {
-          "name": "Qwen 3 Coder 30B A3B (Q4_K_M, 32k ctx)"
-        }
-      }
-    }
-  },
-  "model": "ollama/qwen3-coder:30b-a3b-q4_K_M-32k",
-  "small_model": "ollama/qwen2.5-coder:14b-instruct-q4_K_M",
+  // Models come from opencode Zen, the built-in hosted provider: no provider
+  // block is needed, and the id format is `opencode/<model-id>`
+  // (https://opencode.ai/docs/models).
+  //
+  // THE FREE MODEL LIST ROTATES. Probe it before relying on this line:
+  //   curl -s --max-time 20 https://opencode.ai/zen/v1/models
+  // Free ones are suffixed `-free` (a naming convention, NOT a documented
+  // contract: the endpoint returns no pricing field). Measured 2026-08-21:
+  // Big Pickle had already lost its free suffix while the Zen docs still
+  // described it as free.
+  //
+  // Deliberately no `small_model`: one model, one place to change it.
+  "model": "opencode/muse-spark-1.2-contributor-free",
   "username": "<you>",
   "instructions": ["<absolute path to this repo>/instructions.md"],
   "permission": {
