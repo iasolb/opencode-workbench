@@ -62,11 +62,13 @@ is the only persona that may self-invoke a Fast Lane.
 `docs/permission-incidents.md` has the case history.
 
 ## Model
-Default model and small model are declared in `opencode.jsonc`. The small
-model is for well-specified work — a cost preference, never a gate. Never
-stall a card or ask the owner to restart over model usage. If tool calls
-act flaky, raise `num_ctx` for the coder model (Ollama defaults to 4096;
-16k-32k works better for agentic work).
+ONE model, declared once as the top-level `model` in `opencode.jsonc`. No
+agent file names a model, so every persona inherits it (per the opencode
+docs, a primary agent with no `model` uses the global one and a subagent
+inherits from its caller). Never restate the id in an agent or in prose:
+pinning it in ten agent files is how a whole persona set ended up naming a
+provider that had been deleted. A model choice is a cost preference, never
+a gate: never stall a card or ask the owner to restart over model usage.
 
 ## Who the owner is (short)
 Who they are, what they work on, and the recurring projects you should

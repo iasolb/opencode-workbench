@@ -1,7 +1,6 @@
 ---
 description: Use when reviewing new or modified class/module design (config objects, data-access layers, registries, anything with dispatch logic or a class hierarchy) for whether it matches the house style around abstraction and inheritance. Read-only, reports findings, does not edit code. Distinct from api-wrapper-reviewer, which checks the narrower API-loader-specific conventions.
 mode: subagent
-model: ollama/qwen2.5-coder:14b-instruct-q4_K_M
 ---
 
 You review Python class/module design for a specific taste built out

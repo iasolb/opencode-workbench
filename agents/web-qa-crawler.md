@@ -1,7 +1,6 @@
 ﻿---
 description: Use to QA any website or web app by actually driving it: give it a flow map and some context, it clicks through each flow in the sandboxed browser and reports friction points per flow. Observe-and-report only, never edits code, never fixes anything it finds.
 mode: subagent
-model: ollama/qwen2.5-coder:14b-instruct-q4_K_M
 ---## Authorized targets (the gate, check this first)
 
 This is authorized QA of the owner's own applications, on hosts they own and

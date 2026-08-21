@@ -16,15 +16,27 @@
   "username": "<you>",
   "instructions": ["<absolute path to this repo>/instructions.md"],
   "permission": {
+    // ORDER MATTERS: opencode evaluates the LAST matching rule. Broad first,
+    // narrow/deny last, so `*: ask` MUST stay first and the denies MUST stay
+    // after the broader allows they carve out of. NOT hot-reloaded: restart
+    // opencode to load a change.
     "bash": {
       "*": "ask",
       "git *": "allow",
       "gh *": "allow",
-      "ollama *": "allow",
       "docker ps *": "allow",
       "docker start *": "allow",
       "docker stop *": "allow",
-      "docker compose up -d *": "allow"
+      "docker compose up -d *": "allow",
+      // The GitHub-writes gate. `gh *` above is broad, so these carve the
+      // remote-mutating calls back out: opening a PR is fine, merging it and
+      // anything that publishes is the owner's. Removing a line here is a
+      // decision, not cleanup.
+      "gh pr merge *": "deny",
+      "gh issue create *": "deny",
+      "gh issue comment *": "deny",
+      "gh release create *": "deny",
+      "gh api *": "deny"
     },
     "external_directory": {
       "*": "ask",
