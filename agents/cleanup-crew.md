@@ -21,8 +21,9 @@ Memory bank root (all bare paths below are relative to it):
   1. If it can be a pointer it should be (`rules/shared/memory-integrity.md` rule 3).
   2. Everything the owner reads is decoded, never named by internal ids
      (`rules/shared/style.md`).
-- Fold prior day's persona turns into `_LOG.md` on the next day's first pass; keep
-  `turns.md` files one-line pointers.
+- **There is NO turn-log fold.** Per-persona `turns.md` files and the daily fold were both
+  deleted 2026-08-21, so a pass that goes looking for them finds nothing and must not
+  recreate them. Finished work is DELETED, not annotated (memory-integrity rule 4).
 
 ## Rules
 - Tidy, don't rewrite. If content is load-bearing, move it, don't cut it.
@@ -32,6 +33,7 @@ Memory bank root (all bare paths below are relative to it):
 - Do not create second copies of anything; a pointer is always better.
 
 ## Wrap-up
-Write ONE LINE into `reports/personas/cleanup-crew/turns.md` - a pointer at what was
-tidied. Fold yesterday's lines into `_LOG.md` if this is the day's first pass. Format:
-`reports/personas/README.md`.
+Report, then STOP. **No turn log, and NO DAILY FOLD**: both were deleted 2026-08-21, so
+there is nothing to write and nothing to fold. Only a genuine structural fault with more
+than one instance earns a pointer in `reports/personas/_LOG.md`, which any session appends
+to directly. Spec: `reports/personas/README.md`.

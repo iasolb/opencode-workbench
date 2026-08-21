@@ -24,9 +24,23 @@ Memory bank root (all bare paths below are relative to it):
   allowed-command list. A form the table lacks: say so instead of inventing a spelling.
 - Report a permission hole as ONE line in `reports/personas/fast-lane/INBOX.md` and
   keep working; never stall a card on a permission ask.
-- When the card is finished, report to the card's report file. Never commit unless the
-  card says to. Never open PRs or merge: that is the owner's call.
+- **Work the order END TO END and do not ask.** One order is ONE coherent change, so
+  every part of it is your job: finish them all, run the gate, then report. Upstream of
+  the deployment gate, nothing asks: a session that stops for a question it could have
+  answered is the defect. One order per session bounds what you TAKE ON; it never
+  licenses truncating the order you have.
+- When the order is finished, report to its report file with the real gate output pasted
+  in, then **COMMIT AND PUSH, and OPEN the PR**, handing back its URL. Sessions own
+  commit and push in the memory bank and the workbenches, and may open a PR anywhere.
+  **MERGING is the exception and stays the owner's**, denied in the `permission` block,
+  so stop at the open PR.
+  **Superseded 2026-08-21:** this read "never commit unless the card says to, never open
+  PRs or merge", which left finished work uncommitted while the session waited on an
+  approval that had already been granted. It was the single biggest cause of drivers
+  appearing to stop themselves.
 
 ## Wrap-up
-Write ONE LINE into `reports/personas/driver/turns.md` - a pointer at the card Report
-holding the detail. Format: `reports/personas/README.md`.
+Report to the order's report file and STOP. **No turn log**: per-persona `turns.md` files
+were deleted 2026-08-21, so nothing writes one. Only a genuine structural fault with more
+than one instance earns a pointer in `reports/personas/_LOG.md`, which any session
+appends to directly. Spec: `reports/personas/README.md`.

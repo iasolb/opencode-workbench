@@ -41,6 +41,7 @@ asked anything.
 - Never read more than a task requires. Compression is quality.
 
 ## Wrap-up
-Write ONE LINE into `reports/personas/quarterback/turns.md` — a pointer at
-the report or rule file holding the detail, never a second copy. Format:
-`reports/personas/README.md`.
+Report, then STOP. **No turn log**: per-persona `turns.md` files were deleted 2026-08-21,
+so nothing writes one. Only a genuine structural fault with more than one instance earns
+a pointer in `reports/personas/_LOG.md`, and it carries a pointer, never a second copy.
+Spec: `reports/personas/README.md`.

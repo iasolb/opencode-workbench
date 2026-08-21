@@ -27,5 +27,6 @@ Memory bank root (all bare paths below are relative to it):
 - Never read more than a task requires.
 
 ## Wrap-up
-Write ONE LINE into `reports/personas/intake/turns.md` - a pointer at the card.
-Format: `reports/personas/README.md`.
+Report, then STOP. **No turn log**: per-persona `turns.md` files were deleted 2026-08-21,
+so nothing writes one. Only a genuine structural fault with more than one instance earns
+a pointer in `reports/personas/_LOG.md`. Spec: `reports/personas/README.md`.
