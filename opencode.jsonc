@@ -20,14 +20,95 @@
     // narrow/deny last, so `*: ask` MUST stay first and the denies MUST stay
     // after the broader allows they carve out of. NOT hot-reloaded: restart
     // opencode to load a change.
+    // EVERY SUBCOMMAND OF A PIPELINE NEEDS ITS OWN MATCH. An allowed `git *`
+    // does not carry what it pipes into: `git ... | head -40` prompts, and the
+    // dialog names `head -40` as a separate shell command.
     "bash": {
       "*": "ask",
       "git *": "allow",
       "gh *": "allow",
+      "wsl *": "allow",
+      // Per-host, matching a known-good host list, rather than a blanket
+      // `ssh *`. Add one line per alias you actually use.
+      "ssh <your host alias> *": "allow",
+      "scp *": "allow",
+      "tailscale file get *": "allow",
+      "tailscale status": "allow",
+      "tailscale status *": "allow",
+      "tailscale version": "allow",
+      "tailscale version *": "allow",
+      // `up`/`down`/`set`/`serve` deliberately stay out.
+      "docker ps": "allow",
       "docker ps *": "allow",
       "docker start *": "allow",
       "docker stop *": "allow",
-      "docker compose up -d *": "allow",
+      "docker rm *": "allow",
+      "docker logs *": "allow",
+      "docker inspect *": "allow",
+      "docker exec *": "allow",
+      "docker info": "allow",
+      "docker compose *": "allow",
+      // POSIX read-only text tools. THIS IS THE FAMILY EVERY PORT FORGETS.
+      // Claude Code has a built-in read-only set and gives these away free, so
+      // they appear in no allowlist you might copy from; opencode has no such
+      // set and asks for every command that matches no entry. Each of these
+      // reads and cannot write: `sed` (-i), `awk`, and `find` (-delete/-exec)
+      // are deliberately excluded.
+      "ls": "allow",
+      "ls *": "allow",
+      "cat *": "allow",
+      "head *": "allow",
+      "tail *": "allow",
+      "grep *": "allow",
+      "wc *": "allow",
+      "sort *": "allow",
+      "uniq *": "allow",
+      "cut *": "allow",
+      "diff *": "allow",
+      "stat *": "allow",
+      "file *": "allow",
+      "basename *": "allow",
+      "dirname *": "allow",
+      "which *": "allow",
+      "echo *": "allow",
+      "pwd": "allow",
+      "du *": "allow",
+      "df *": "allow",
+      "jq *": "allow",
+      // Read-only PowerShell cmdlets, for a Windows host. ForEach-Object and
+      // Where-Object are deliberately out: they take scriptblocks.
+      "Get-ChildItem *": "allow",
+      "Get-Content *": "allow",
+      "Get-Item *": "allow",
+      "Get-ItemProperty *": "allow",
+      "Test-Path *": "allow",
+      "Get-Command *": "allow",
+      "Get-Process *": "allow",
+      "Get-Service *": "allow",
+      "Select-String *": "allow",
+      "Select-Object *": "allow",
+      "Sort-Object *": "allow",
+      "Measure-Object *": "allow",
+      "Group-Object *": "allow",
+      "Format-Table *": "allow",
+      "Format-List *": "allow",
+      "Out-String *": "allow",
+      // Your own interpreters and scripts go here, by ABSOLUTE path. A bare
+      // `python`/`pytest`/`npm` matches nothing. Anything destructive gets an
+      // EXACT match with no wildcard, so its arguments cannot be swapped.
+      //
+      // WRITE EVERY SPELLING YOU MIGHT TYPE. A command entry prefix-matches the
+      // literal string, so on Windows a backslash entry does not cover the
+      // `/c/...` form that a POSIX-flavoured session actually emits.
+      "<absolute path to your interpreter> *": "allow",
+      // VENV BOOTSTRAP, the one blessed bare-interpreter form: the shell-form
+      // guard carves `-m venv` out of its bare-interpreter rule on purpose,
+      // because you cannot use a venv's own interpreter before it exists. If
+      // the allowlist does not agree with the guard, the one form the guard
+      // blesses is the one that prompts. Narrow: `-m venv` creates a directory
+      // and cannot execute arbitrary code. A bare `python *` stays forbidden.
+      "python -m venv *": "allow",
+      "python3 -m venv *": "allow",
       // The GitHub-writes gate. `gh *` above is broad, so these carve the
       // remote-mutating calls back out: opening a PR is fine, merging it and
       // anything that publishes is the owner's. Removing a line here is a
@@ -41,7 +122,13 @@
     "external_directory": {
       "*": "ask",
       "<your memory bank repo>/**": "allow",
-      "<your projects root>/**": "allow"
+      "<your projects root>/**": "allow",
+      // The three directories opencode OWNS. Without these it asks permission
+      // to reach its own scratch space, its own config and its own staged tool
+      // output, which is pure friction with nothing to decide.
+      "~/AppData/Local/Temp/opencode/**": "allow",
+      "~/.config/opencode/**": "allow",
+      "~/.local/share/opencode/**": "allow"
     },
     "edit": "allow",
     "webfetch": "allow",
