@@ -103,6 +103,43 @@
       "ConvertTo-Json *": "allow",
       "Compare-Object *": "allow",
       "Write-Output *": "allow",
+      // Network and diagnostics, read-only. `curl` being absent was the single
+      // largest gap found when this block was diffed against the Claude-side
+      // allow list: a whole family that the first port never carried over.
+      "curl *": "allow",
+      "netstat *": "allow",
+      "tasklist *": "allow",
+      "nslookup *": "allow",
+      "dig *": "allow",
+      "Resolve-DnsName *": "allow",
+      "openssl s_client *": "allow",
+      "openssl x509 *": "allow",
+      "node *": "allow",
+      // A leading VAR=value is part of the string the matcher sees, so the bare
+      // `docker *` above cannot cover this form.
+      "MSYS_NO_PATHCONV=1 docker *": "allow",
+      // The remainder of the read-only set the other harness grants for free,
+      // and therefore never lists in its own config. `sed`, `awk`, `xargs`,
+      // `tee` and `find` are deliberately absent: they write, execute or delete.
+      "date": "allow",
+      "date *": "allow",
+      "whoami": "allow",
+      "hostname": "allow",
+      "uname *": "allow",
+      "env": "allow",
+      "printenv *": "allow",
+      "realpath *": "allow",
+      "readlink *": "allow",
+      "tr *": "allow",
+      "nl *": "allow",
+      "seq *": "allow",
+      "comm *": "allow",
+      "paste *": "allow",
+      "column *": "allow",
+      "sha256sum *": "allow",
+      "md5sum *": "allow",
+      "tree": "allow",
+      "tree *": "allow",
       // Read-only PowerShell cmdlets, for a Windows host. ForEach-Object and
       // Where-Object are deliberately out: they take scriptblocks.
       "Get-ChildItem *": "allow",
