@@ -75,6 +75,13 @@
       "du *": "allow",
       "df *": "allow",
       "jq *": "allow",
+      // `mkdir` is a WRITE command and sits outside the read-only family above
+      // on purpose. Allowed anyway, on one argument: `"edit": "allow"` is set
+      // below, so a session can already create and write FILES anywhere the
+      // directory rules permit, and creating a directory is strictly less
+      // powerful. It cannot delete or overwrite. NOT a precedent for `rm`,
+      // `mv` or `cp`: those destroy or relocate, and each needs its own call.
+      "mkdir *": "allow",
       // Read-only PowerShell cmdlets, for a Windows host. ForEach-Object and
       // Where-Object are deliberately out: they take scriptblocks.
       "Get-ChildItem *": "allow",
