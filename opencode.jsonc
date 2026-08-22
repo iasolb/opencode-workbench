@@ -82,6 +82,27 @@
       // powerful. It cannot delete or overwrite. NOT a precedent for `rm`,
       // `mv` or `cp`: those destroy or relocate, and each needs its own call.
       "mkdir *": "allow",
+      // Syntax-check a shell script you just edited. Read-only: `-n` parses and
+      // never executes.
+      "bash -n *": "allow",
+      // The rest of the pure-read cmdlets. The first port of this block covered
+      // fourteen `Get-*`/`Select-*`/`Format-*` verbs and missed the others, so
+      // `Get-Date` prompted. `ForEach-Object` and `Where-Object` stay OUT: they
+      // take arbitrary scriptblocks.
+      "Get-Date": "allow",
+      "Get-Date *": "allow",
+      "Get-Location": "allow",
+      "Get-Location *": "allow",
+      "Get-Member *": "allow",
+      "Get-Unique *": "allow",
+      "Get-NetTCPConnection *": "allow",
+      "Resolve-Path *": "allow",
+      "Split-Path *": "allow",
+      "Join-Path *": "allow",
+      "ConvertFrom-Json *": "allow",
+      "ConvertTo-Json *": "allow",
+      "Compare-Object *": "allow",
+      "Write-Output *": "allow",
       // Read-only PowerShell cmdlets, for a Windows host. ForEach-Object and
       // Where-Object are deliberately out: they take scriptblocks.
       "Get-ChildItem *": "allow",
