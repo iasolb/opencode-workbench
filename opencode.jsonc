@@ -115,16 +115,23 @@
       "openssl s_client *": "allow",
       "openssl x509 *": "allow",
       "node *": "allow",
-      // Opencode read-only commands (session list and stats usage). Bare forms
-      // for `opencode` in PATH, plus absolute paths as actually invoked by drivers.
+      // Opencode read-only subcommands (enumerated, not a wildcard family).
+      // Enumeration required: `opencode *` would match `opencode run`, which
+      // must stay denied. Character-based matcher cannot express the family
+      // (stats, session list, export) without catching run. Adding both bare
+      // forms and absolute paths as drivers invoke them.
       "opencode session list": "allow",
       "opencode session list *": "allow",
       "opencode stats": "allow",
       "opencode stats *": "allow",
+      "opencode export": "allow",
+      "opencode export *": "allow",
       "C:\\Users\\ians0\\AppData\\Roaming\\npm\\node_modules\\opencode-ai\\bin\\opencode.exe session list": "allow",
       "C:\\Users\\ians0\\AppData\\Roaming\\npm\\node_modules\\opencode-ai\\bin\\opencode.exe session list *": "allow",
       "C:\\Users\\ians0\\AppData\\Roaming\\npm\\node_modules\\opencode-ai\\bin\\opencode.exe stats": "allow",
       "C:\\Users\\ians0\\AppData\\Roaming\\npm\\node_modules\\opencode-ai\\bin\\opencode.exe stats *": "allow",
+      "C:\\Users\\ians0\\AppData\\Roaming\\npm\\node_modules\\opencode-ai\\bin\\opencode.exe export": "allow",
+      "C:\\Users\\ians0\\AppData\\Roaming\\npm\\node_modules\\opencode-ai\\bin\\opencode.exe export *": "allow",
       // A leading VAR=value is part of the string the matcher sees, so the bare
       // `docker *` above cannot cover this form.
       "MSYS_NO_PATHCONV=1 docker *": "allow",
