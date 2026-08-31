@@ -3,7 +3,8 @@
 A template for versioning your global opencode configuration in git:
 instructions, the `opencode.jsonc` config, agents, commands, and the memory
 MCP graph, with optional cross-machine sync so opencode remembers the same
-things everywhere you work.
+things everywhere you work. For anyone who wants their opencode setup
+tracked, portable, and reproducible.
 
 ## What you get
 
@@ -51,7 +52,7 @@ it does not hot-reload config.
 - `opencode.jsonc`: models, permissions, and MCP servers
 - `instructions.md`: global instructions, loaded in every session
 - `rules/`: standing rules, one file per topic, split into `shared/` (every
-  tool reads them) and `opencode/` (this tool's mechanics), see below
+  tool reads them) and `opencode/` (this tool's mechanics)
 - `agents/`: persona agents and QA/review subagents
 - `commands/`: slash commands, including the five personas and the
   lightweight + QA/review tools described below
@@ -59,13 +60,24 @@ it does not hot-reload config.
 - `install/`: the per-platform installers
 - `docs/`: troubleshooting
 
+## Start here
+
+Clone the template, run the installer for your platform, then fill in the
+placeholders in `opencode.jsonc` and `instructions.md`. The deep sections
+below cover the rules, the personas, the QA/review tools, and multi-machine
+sync.
+
+---
+
+# Details
+
 ## The rules
 
 `rules/` ships the same nine standing rules as the sibling claude-workbench,
-split into `shared/` (memory integrity, style, documentation, dev-practices,
-planning-mode) and `opencode/` (git-github, permission-block, jobs), each
-adapted to opencode's config shape. `rules/README.md` has a one-line summary
-of each.
+split into `shared/` (memory integrity, style, documentation,
+dev-practices, planning-mode) and `opencode/` (git-github,
+permission-block, jobs), each adapted to opencode's config shape.
+`rules/README.md` has a one-line summary of each.
 
 They are **opinionated on purpose**: a rule file that hedges gives a session
 nothing to act on. Read them as a starting position, keep what fits, edit
@@ -112,17 +124,19 @@ Same branch-per-machine model as the claude-workbench: each machine lives
 permanently on its own branch, and sessions start by merging the other
 machines' branches. Because opencode has no hooks, the merge step is a line
 in `instructions.md`'s session start: fetch, merge the sibling branches,
-resolve conflicts (keep both sides' facts). See `rules/opencode/git-github.md`.
+resolve conflicts (keep both sides' facts). See
+`rules/opencode/git-github.md`.
 
 ## What stays out of the repo
 
-The live config dir also holds credentials and session state. None of that is
-symlinked from the repo, so none of it can be committed. The repo never
-contains secrets unless you put them there; keep API keys, OAuth token files,
-and database passwords in their usual homes, not in `opencode.jsonc`. The
-credential-bearing MCP servers (gmail, google-workspace, a project database,
-Desktop Commander) are deliberately left out of the shipped config — copy
-their shape from your live config on the machine that already has them.
+The live config dir also holds credentials and session state. None of that
+is symlinked from the repo, so none of it can be committed. The repo never
+contains secrets unless you put them there; keep API keys, OAuth token
+files, and database passwords in their usual homes, not in `opencode.jsonc`.
+The credential-bearing MCP servers (gmail, google-workspace, a project
+database, Desktop Commander) are deliberately left out of the shipped
+config — copy their shape from your live config on the machine that already
+has them.
 
 ## Troubleshooting
 
