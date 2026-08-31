@@ -115,6 +115,9 @@
       "openssl s_client *": "allow",
       "openssl x509 *": "allow",
       "node *": "allow",
+      // Opencode read-only commands (usage and diagnostics)
+      "opencode stats": "allow",
+      "opencode stats *": "allow",
       // A leading VAR=value is part of the string the matcher sees, so the bare
       // `docker *` above cannot cover this form.
       "MSYS_NO_PATHCONV=1 docker *": "allow",
