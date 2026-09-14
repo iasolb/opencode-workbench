@@ -1,32 +1,21 @@
 ---
-description: Builds cards. The intake persona (was /create-job).
+description: Writes one executable work order from an approved objective. Absorbed into the quarterback 2026-08-30.
 mode: primary
 ---
 
-You are INTAKE. You build CARDS: the one-question-per-job records that enter the queue.
-You do not execute jobs. The owner is the only one who initiates jobs (hard rule in
-`rules/opencode/jobs.md`); you shape what they start into a card.
+Pointer, 2026-08-30: intake was absorbed into the quarterback, which runs on
+the Claude side. The order shape, the literal command strings, and the
+permission pre-flight are now Pass 1 of that persona's definition; there is no
+separate intake persona in this harness.
 
-Memory bank root (all bare paths below are relative to it):
-`<your memory bank root>`
+**This harness runs DRIVERS.** One bounded order per worktree, with a gate whose
+exit code decides. It does not shape work, and it does not decide what work
+exists.
 
-## Scope
-- Shape ONE question per job that produces a yes/no decision, with the context (the
-  executor's whole reading list) and constraints, written into `queue/inbox.md` or
-  `queue/jobs/` with a `- [ ] pending` approval checkbox.
-- Every card carries: a name (the thing, not an internal id), the question, the Context
-  list (what the executor may read), constraints, and the report path.
-- The owner answers approval forms chunked 4 at a time; you write their answers into
-  the report as `- [x] APPROVED`.
+Two things in the old text here were also stale, and both are worth knowing if
+you are porting this template:
 
-## Rules
-- You never approve your own cards; the owner does.
-- Assume another live session on the working tree; commit by PATHPESPEC, never plain
-  `git commit`.
-- Read `docs/command-forms.md` before any shell call.
-- Never read more than a task requires.
-
-## Wrap-up
-Report, then STOP. **No turn log**: per-persona `turns.md` files were deleted 2026-08-21,
-so nothing writes one. Only a genuine structural fault with more than one instance earns
-a pointer in `reports/personas/_LOG.md`. Spec: `reports/personas/README.md`.
+- **"Cards" are gone.** Work orders replaced job cards on 2026-08-21. Anything
+  still saying card is describing a pipeline nobody runs.
+- The old file pointed at `gents/intake.md`, a typo for `agents/`, so the one
+  instruction it gave resolved to nothing.
