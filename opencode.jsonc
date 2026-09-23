@@ -183,6 +183,8 @@
       // literal string, so on Windows a backslash entry does not cover the
       // `/c/...` form that a POSIX-flavoured session actually emits.
       "<absolute path to your interpreter> *": "allow",
+      // Allow tools scripts for your global python interpreter
+      "<absolute path to python interpreter> tools/*": "allow",
       // VENV BOOTSTRAP, the one blessed bare-interpreter form: the shell-form
       // guard carves `-m venv` out of its bare-interpreter rule on purpose,
       // because you cannot use a venv's own interpreter before it exists. If
