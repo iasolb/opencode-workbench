@@ -11,8 +11,22 @@
   // Big Pickle had already lost its free suffix while the Zen docs still
   // described it as free.
   //
-  // Deliberately no `small_model`: one model, one place to change it.
-  "model": "opencode/muse-spark-1.2-contributor-free",
+  // THE DEFAULT IS A DATA DECISION FIRST: never a `-free` id that trains on
+  // your prompts. `small_model` is pinned too, because it writes session
+  // titles from your first message and otherwise picks the cheapest model.
+  "model": "opencode/gpt-5-nano",
+  "small_model": "opencode/gpt-5-nano",
+  // ONLY THE LISTED MODELS CAN BE SENT. `enabled_providers` drops every other
+  // provider; `whitelist` hides every other model. `headerTimeout` (ms, default
+  // 300000) makes a request that never starts fail in 90s instead of hanging 5
+  // minutes, which is how an exhausted allowance presents.
+  "enabled_providers": ["opencode"],
+  "provider": {
+    "opencode": {
+      "whitelist": ["gpt-5-nano", "gpt-5.4-nano"],
+      "options": { "headerTimeout": 90000 }
+    }
+  },
   "username": "<you>",
   "instructions": ["<absolute path to this repo>/instructions.md"],
   "permission": {
